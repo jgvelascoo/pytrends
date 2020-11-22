@@ -511,6 +511,7 @@ class TrendReq(object):
 
         # the timeframe has to be in 1 week intervals or Google will reject it
         delta = timedelta(days=7)
+        wdelta = timedelta(days=1)
 
         df = pd.DataFrame()
 
@@ -534,7 +535,9 @@ class TrendReq(object):
                 pass
 
             start_date += delta
+            start_date -= wdelta
             date_iterator += delta
+            date_iterator -= wdelta
 
             if (date_iterator > end_date):
                 # Run for 7 more days to get remaining data that would have been truncated if we stopped now
